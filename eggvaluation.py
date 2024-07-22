@@ -76,7 +76,8 @@ try:
                         'Gemeindeschlüssel', 'Anzahl der Solar-Module', 'Hauptausrichtung der Solar-Module',
                         'Name des Windparks', 'Nabenhöhe der Windenergieanlage',
                         'Rotordurchmesser der Windenergieanlage',
-                        'Hersteller der Windenergieanlage', 'Typenbezeichnung']]
+                        'Hersteller der Windenergieanlage', 'Typenbezeichnung',
+                        'Nutzbare Speicherkapazität in kWh', 'Lage der Einheit', ]]
 
     final_df = matching_rows[columns_order]
 
