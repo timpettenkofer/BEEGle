@@ -18,17 +18,17 @@ def save_file(prompt):
     root.destroy()
     return file_path
 
-# Step 1: File selection dialogs
+# Dialoge zur Dateiauswahl
 mastr_file = select_file("Bitte die Datei mit dem Auszug aus dem Marktstammdatenregister auswählen.")
 eeg_file = select_file("Bitte die Datei mit den Zuschlägen der EEG-Biomasseausschreibung auswählen.")
-output_file = save_file("Bitte den Speicherort für die Ausgabedatei angeben.")
+output_file = save_file("Bitte den Speicherort für die Ausgabedatei auswählen.")
 
-# Step 2: Read the Excel files
+# Lesen der Excel-Dateien
 mastr_df = pd.read_excel(mastr_file)
 eeg_sheet2_df = pd.read_excel(eeg_file, sheet_name=1)
 eeg_sheet3_df = pd.read_excel(eeg_file, sheet_name=2)
 
-# Step 3: Process EEG sheet 3 to extract relevant numbers
+# Verarbeitung von EEG-Zuschlagsliste zur Extraktion relevanter Zahlen
 def extract_numbers(cell):
     if pd.isna(cell):
         return []
@@ -39,7 +39,7 @@ eeg_sheet3_df['Nummern'] = eeg_sheet3_df.iloc[:, 1].apply(extract_numbers)
 eeg_sheet3_df['Zuschlagsnummer'] = eeg_sheet3_df.iloc[:, 0]  # Extract Zuschlagsnummer
 eeg_numbers = set(num for sublist in eeg_sheet3_df['Nummern'] for num in sublist)
 
-# Step 4: Find matching rows in MaStR dataframe and add Zuschlagsnummer
+# Übereinstimmende Zeilen in MaStR-Datei suchen und Zuschlagsnummer hinzufügen
 def find_matching_zuschlagsnummer(row):
     mastr_numbers = set([row['MaStR-Nr. der EEG-Anlage'], row['MaStR-Nr. der Einheit']])
     for num in mastr_numbers:
@@ -51,5 +51,5 @@ def find_matching_zuschlagsnummer(row):
 mastr_df['Zuschlagsnummer'] = mastr_df.apply(find_matching_zuschlagsnummer, axis=1)
 matching_rows = mastr_df.dropna(subset=['Zuschlagsnummer'])
 
-# Step 5: Save the output to a new Excel file
+# Speichern der Ausgabe in einer neuen Excel-Datei
 matching_rows.to_excel(output_file, index=False)
