@@ -72,10 +72,9 @@ try:
     columns_order = ['Zuschlagsnummer', 'MaStR-Nr. der EEG-Anlage', 'MaStR-Nr. der Einheit'] + \
                     [col for col in matching_rows.columns if col not in [
                         'Zuschlagsnummer', 'MaStR-Nr. der EEG-Anlage', 'MaStR-Nr. der Einheit', 'Gemarkung',
-                        'Flurstück',
-                        'Gemeindeschlüssel', 'Anzahl der Solar-Module', 'Hauptausrichtung der Solar-Module',
-                        'Name des Windparks', 'Nabenhöhe der Windenergieanlage',
-                        'Rotordurchmesser der Windenergieanlage',
+                        'Flurstück', 'Gemeindeschlüssel', 'Anzahl der Solar-Module', 
+                        'Hauptausrichtung der Solar-Module', 'Name des Windparks', 
+                        'Nabenhöhe der Windenergieanlage', 'Rotordurchmesser der Windenergieanlage',
                         'Hersteller der Windenergieanlage', 'Typenbezeichnung',
                         'Nutzbare Speicherkapazität in kWh', 'Lage der Einheit', ]]
 
